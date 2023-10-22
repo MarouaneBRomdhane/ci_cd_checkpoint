@@ -1,0 +1,27 @@
+pipeline {
+    agent any
+    tools {
+        nodejs 'nodejs'
+        dockerTool 'docker'
+    }
+
+    stages {
+        stage("git clone") {
+            steps {
+                git branch: 'main', url: 'https://github.com/MarouaneBRomdhane/ci_cd_checkpoint.git'            
+                }
+        }
+
+        stage("install dependencies") {
+            steps {
+                sh 'npm install'
+            }
+        }
+
+        stage("build the project") {
+            steps {
+                sh 'npm run build'
+            }
+        }
+     }   
+}
